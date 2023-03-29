@@ -64,9 +64,9 @@ def github_downloader():
             sleep(2)
             continue
         except Exception as e:
-            print("An error occurred. Maybe the link is not correct or the folder name already exists.")
-            print(str(e))
-            sleep(2)
+            print("An error occured the link is likely invalid")
+           # print(str(e))
+            sleep(5)
             clear_console()
             main_menu()
         

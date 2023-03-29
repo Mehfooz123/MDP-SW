@@ -36,7 +36,7 @@ def youtube_menu():
             main_menu()
         elif choice == '1':
             clear_console()
-            url = input("Enter video URL: ")
+            url = input(f"{colors.Color.white}Enter video URL:{colors.Color.reset} ")
             try:
                 yt = YouTube(url)
             except:
@@ -59,7 +59,7 @@ def youtube_menu():
                 sleep(2)
                 continue
 
-            print("\nAvailable Resolutions:")
+            print(f"{colors.Color.White}\nAvailable Resolutions:{colors.Color.reset}")
             for i, format in enumerate(formats):
                 print(f"{i+1}. {format['qualityLabel']}")
 
@@ -81,7 +81,7 @@ def youtube_menu():
             
             selected_format = formats[selection-1]
             if 'url' not in selected_format:
-                print(f"{colors.Color.red}Invalid video format. Please try another resolution.{colors.color.reset}")
+                print(f"{colors.Color.red}Invalid video format. Please try another resolution.{colors.Color.reset}")
                 sleep(2)
                 continue
 
@@ -89,9 +89,24 @@ def youtube_menu():
             filename = f"./youtube/{video_info['title']}_{selected_format['qualityLabel']}.mp4"
             download_video(url, filename)
 
-            print(f"Video saved to {filename}")
+            print(f"{colors.Color.Green}Video downloaded & saved to {filename}{colors.Color.reset}")
         elif choice == "2":
-            print("Comming soon")
+            from youtubeServices import download_thumbnail
+            url = input(f"{colors.Color.white}Enter video URL:{colors.Color.reset} ")
+            try:
+                yt = YouTube(url)
+            except:
+                print(f"{colors.Color.red}Invalid URL. Please try again{colors.Color.reset} ")
+                sleep(2)
+                continue
+            try:
+                download_thumbnail(url)
+                print(f"{colors.Color.Green}Download succesfully completed.{colors.Color.reset}")
+                sleep(5)
+            except Exception as e:
+                print("An error occured please report")
+                print(e)
+                sleep(5)
         else:
-            print(f"{colors.Color.red}Invalid choice. Try again.{colors.color.reset}")
+            print(f"{colors.Color.red}Invalid choice. Try again.{colors.Color.reset}")
             sleep(2)
